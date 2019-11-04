@@ -1,5 +1,6 @@
 #include <unistd.h>
-ft_is_negative(int n)
+
+void ft_is_negative(int n)
 {
     if(n < 0)
         write(1, "N", 1);

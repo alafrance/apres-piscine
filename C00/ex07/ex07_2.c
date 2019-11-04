@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <unistd.h>
 
 int sizeInt(int nbr)
 {
@@ -12,7 +12,7 @@ int sizeInt(int nbr)
     return size;
 }
 
-int tailleInt(int size)
+int taille_10_Int(int size)
 {
     int i = 0;
     int taille = 1;
@@ -23,27 +23,38 @@ int tailleInt(int size)
     }
     return taille;
 }
-void ft_putnbr(int nbr)
+
+int reverse_number(int nbr, int taille)
 {
     int nb = 0;
-    int i;
-    int size = sizeInt(nbr);
-//    nb = 0;
-    i = tailleInt(size);
-    printf("i : %d, size: %d\n", i, size);
+    while (nbr > 10)
+    {
+        nb = nb + (nbr % 10) * taille ;
+        nbr = nbr / 10;
+        if (taille >= 10)
+            taille = taille / 10;
+    }
+    nb = nb + (nbr % 10);
+    return nb;
+}
+void ft_putnbr(int nbr)
+{
+    int nb;
+    int size;
+    char i;
     if (nbr < 0)
     {
         write(1, "-", 1);
         nbr = nbr * -1;
     }
-    while (nbr > 10)
+    size = sizeInt(nbr);
+    nb = reverse_number(nbr, taille_10_Int(size));
+    while (nb > 10)
     {
-        nb = nb + (nbr % 10) * i ;
-        nbr = nbr / 10;
-        if (i > 10)
-            i = i / 10;
-        else
-            printf("Bonjour\n");
+        i = nb % 10 + 48;
+        write(1, &i, 1);
+        nb = nb / 10;
     }
-    printf("nb = %d\n", nb);
+    i = nb % 10 + 48;
+    write(1, &i, 1);
 }

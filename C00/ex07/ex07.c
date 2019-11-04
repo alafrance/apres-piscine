@@ -16,5 +16,4 @@ void ft_putnbr(int nb)
     }
     nb = nb % 10 + 48;
     write(1, &nb, 1);
-
 }
