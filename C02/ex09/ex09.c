@@ -1,47 +1,43 @@
 #include <stdio.h>
 
-// Seg fault a cause de l'exo07 et ex08
-int ft_char_is_uppercase(char c)
-{
+int is_uppercase(char c) {
     return (c >= 'A' && c <= 'Z') ? 1 : 0;
 }
 
-int ft_char_is_lowercase(char c)
-{
+int is_lowercase(char c){
     return (c >= 'a' && c <= 'z') ? 1 : 0;
+}
+int is_number(char c){
+    return (c >= '1' && c <= '9') ? 1 : 0;
+}
+int is_word(char c){
+    return (is_lowercase(c) || is_uppercase(c) || is_number(c)) ? 1 : 0;
 }
 
 char *ft_strcapitalize(char *str)
 {
-
     int i = 0;
-    if (ft_char_is_lowercase(str[0]))
-        {
-            str[0] = str[0] - 32;
-            printf("test\n");
+    if (is_lowercase(str[i]))
+        str[i] = str[i] - 32;
+    i++;
+    while (str[i]){
+        if (!is_word(str[i]) && is_lowercase(str[i + 1])){
+            i++;
+            str[i] -= 32;
         }
-/*
-    while (str[i])
-    {
-        if (str[i] == ' ' && (str[i + 1] > 'a' && str[i + 1] < 'z')
-        {
-            str[i + 1] = str[i + 1] - 32;
+        i++;
+        while (is_word(str[i])){
+            if(is_uppercase(str[i]))
+                str[i] += 32;
             i++;
-            i++;
-            while (str[i] || str[i] != ' ')
-            {
-                if (str[i] > 'A' 
-                i++;
-            }
-        } 
-        i++; // régler incrém
+        }
     }
-*/
     return str;
 }
 
 
 int main()
 {
-    printf("%s", ft_strcapitalize("nonjour"));
+    char str[] = "salut,comment tu vas ? 42moTs quarante-deux; cinquante+et+un1";
+    printf("%s", ft_strcapitalize(str));
 }
