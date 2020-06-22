@@ -4,3 +4,10 @@ int ft_strlen(char *str)
     while (str[++i]);
     return (i);
 }
+/*
+#include <stdio.h>
+int main() {
+    printf("%d", ft_strlen("1234"));
+    return 0;
+}
+*/

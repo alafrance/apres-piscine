@@ -5,13 +5,25 @@ void ft_rev_int_tab(int *tab, int size)
     {
         int swap;
         swap = tab[i];
-<<<<<<< HEAD
         tab[i] = tab[size - i - 1];
         tab[size - i - 1] = swap;
-=======
-        tab[i] = tab[size - i];
-        tab[size - i] = swap;
->>>>>>> f9bca36600f23744493d3448e92e42b2a041b408
         i++;
     }
 }
+/*
+#include <stdio.h>
+int main() {
+    int tab[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int i = -1;
+    while(i++ != 9){
+        printf("%d : %d\n", i, tab[i]);
+    }
+    i = -1;
+    printf("\n");
+    ft_rev_int_tab(tab, 9);
+    while(i++ != 9){
+        printf("%d : %d\n", i, tab[i]);
+    }
+    return 0;
+}
+*/

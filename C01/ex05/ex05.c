@@ -10,8 +10,10 @@ void ft_putstr(char *str)
     int i = 0;
     while (str[i])
         ft_putchar(str[i++]);
-<<<<<<< HEAD
 }
-=======
+/*
+int main() {
+    ft_putstr("coucou Jean !");
+    return 0;
 }
->>>>>>> f9bca36600f23744493d3448e92e42b2a041b408
+*/
