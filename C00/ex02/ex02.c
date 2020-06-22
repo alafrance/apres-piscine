@@ -8,4 +8,8 @@ void ft_print_reverse_alphabet(void)
         write(1, &i, 1 );
         i--;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f9bca36600f23744493d3448e92e42b2a041b408

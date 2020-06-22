@@ -16,5 +16,8 @@ void ft_putnbr(int nb)
     }
     nb = nb % 10 + 48;
     write(1, &nb, 1);
+<<<<<<< HEAD
 
+=======
+>>>>>>> f9bca36600f23744493d3448e92e42b2a041b408
 }
