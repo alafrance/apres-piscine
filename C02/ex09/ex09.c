@@ -3,18 +3,12 @@
 // Seg fault a cause de l'exo07 et ex08
 int ft_char_is_uppercase(char c)
 {
-    int bool = 0;
-    if (c >= 'A' && c <= 'Z')
-        bool = 1;
-    return bool;
+    return (c >= 'A' && c <= 'Z') ? 1 : 0;
 }
 
 int ft_char_is_lowercase(char c)
 {
-    int bool = 0;
-    if (c >= 'a' && c <= 'z')
-        bool = 1;
-    return bool;
+    return (c >= 'a' && c <= 'z') ? 1 : 0;
 }
 
 char *ft_strcapitalize(char *str)
@@ -24,7 +18,7 @@ char *ft_strcapitalize(char *str)
     if (ft_char_is_lowercase(str[0]))
         {
             str[0] = str[0] - 32;
-            printf("test\n");      
+            printf("test\n");
         }
 /*
     while (str[i])
