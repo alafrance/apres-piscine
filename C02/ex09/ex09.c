@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 int is_uppercase(char c) {
     return (c >= 'A' && c <= 'Z') ? 1 : 0;
 }
@@ -35,9 +33,11 @@ char *ft_strcapitalize(char *str)
     return str;
 }
 
-
+/*
+#include <stdio.h>
 int main()
 {
     char str[] = "salut,comment tu vas ? 42moTs quarante-deux; cinquante+et+un1";
     printf("%s", ft_strcapitalize(str));
 }
+*/
