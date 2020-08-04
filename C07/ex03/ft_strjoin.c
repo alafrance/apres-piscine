@@ -68,13 +68,13 @@ char	*ft_strjoin(int size, char **strs, char *sep){
 #include <string.h>
 int main(){
 	char *strs[3] = {
-		"j'aime pas",
+		"j'aime",
 		"trop",
 		"les juifs"
 	};
 	char *str;
 
-	char sep[5] = "8--D";
+	char sep[2] = "-";
 
 	str = ft_strjoin(3, strs, sep);
 	//printf("%d\n", count_size_all(strs, 3, ft_strlen(sep)));
