@@ -121,7 +121,7 @@ void *ft_print_memory(void *addr, unsigned int size)
     }
     return addr;
 }
-
+/*
 #include <stdio.h>
 #include <string.h>
 int main()
@@ -129,4 +129,5 @@ int main()
     char str[92] = "Bonjour les aminches...c  est fou.tout.ce qu on peut faire avec...print_memory....lol.lol\n ";
     ft_print_memory(&str, strlen(str));
 }
+*/
 // correction : https://git.42l.fr/frdescam/PISCINE/src/branch/master/C02/ex12/ft_print_memory.c
