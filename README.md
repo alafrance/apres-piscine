@@ -1,5 +1,5 @@
 Github - All C Projects - 2019 Piscine 42 Lyon  
-Done - C00  
+Done - C00 but not 'ft_print_combn.c' 
 Done - C01  
 Done - C02  
 Done - C03  
