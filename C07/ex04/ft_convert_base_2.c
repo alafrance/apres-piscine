@@ -79,3 +79,35 @@ int size_malloc_base_10_to_b(int nbr, int base){
 	}
 	return count;
 }
+char *ft_reverse_char(char *str){
+	int i;
+	int j;
+	char swp;
+
+	i = 0;
+	j = ft_strlen(str) - 1;
+	while(i != ft_strlen(str) / 2){
+		swp = str[i];
+		str[i] = str[j];
+		str[j] = swp;
+		i++;
+		j--;
+	}
+	return str;
+}
+int ft_atoi(char *str){
+    int nb;
+    int sign;
+    int i;
+
+    i = 0;
+    sign = 1;
+    while(is_whitespace(str[++i]));
+    while(str[i] == '-' || str[i] == '+'){
+        if(str[i++] == '-')
+            sign *= -1;
+    }
+    while(str[i] >= '0' && str[i] <= '9')
+        nb = (nb * 10) + (str[i++] - 48);
+    return nb * sign;
+}
