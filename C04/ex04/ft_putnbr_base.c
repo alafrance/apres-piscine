@@ -10,6 +10,13 @@ void ft_putchar(char c)
 {
     write(1, &c, 1);
 }
+
+int is_whitespace(char c){
+    if(c == ' ' || (c >= 9 && c <= 13))
+        return 1;
+    return 0;
+}
+
 int is_valid(char *base){
     int i;
     int j;
@@ -62,6 +69,6 @@ void ft_putnbr_base(int nb, char *base)
 
 int main(int argc, char const *argv[])
 {
-    ft_putnbr_base(0, "0123456789abcdef");   
+    ft_putnbr_base(123, "0123456789abcdef");   
     return 0;
 }
