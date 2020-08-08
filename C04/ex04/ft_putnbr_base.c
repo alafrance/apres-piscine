@@ -16,23 +16,18 @@ int is_whitespace(char c){
         return 1;
     return 0;
 }
-
-int is_valid(char *base){
+int check_base(char *base){
     int i;
     int j;
     char c;
 
     j = 0;
     i = 0;
-    if(ft_strlen(base) == 0 || ft_strlen(base) == 1 || is_whitespace(base[i]))
+    if(ft_strlen(base) == 0 || ft_strlen(base) == 1)
         return 0;
     while(base[i]){
-        if(base[i] == '+' || base[i] == '-')
+		if(base[i] == '+' || base[i] == '-' || is_whitespace(base[i]) || base[i] < 32)
             return 0;
-        i++;
-    }
-    i = 0;
-    while(base[i]){
         c = base[i];
         j = i + 1;
         while(base[j]){
@@ -45,13 +40,14 @@ int is_valid(char *base){
     return 1;
 }
 
+
 void ft_putnbr_base(int nb, char *base)
 {
     long nbr;
     int base_l;
 
     base_l = ft_strlen(base);
-    if (is_valid(base)){
+    if (check_base(base)){
         if (nb < 0) {
             ft_putchar('-');
             nb *= -1;
@@ -65,10 +61,15 @@ void ft_putnbr_base(int nb, char *base)
         ft_putchar(base[nb]);
     }
 }
-#include <stdio.h>
 
-int main(int argc, char const *argv[])
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int ac, char const *av[])
 {
-    ft_putnbr_base(123, "0123456789abcdef");   
+	if (ac == 3)
+    	ft_putnbr_base(atoi(av[1]), (char *)av[2]);   
     return 0;
 }
+*/

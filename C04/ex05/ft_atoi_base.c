@@ -10,7 +10,7 @@ int     ft_strlen(char *str){
     while(str[++i]);
     return i;
 }
-int is_valid(char *base){
+int check_base(char *base){
     int i;
     int j;
     char c;
@@ -20,12 +20,8 @@ int is_valid(char *base){
     if(ft_strlen(base) == 0 || ft_strlen(base) == 1)
         return 0;
     while(base[i]){
-        if(base[i] == '+' || base[i] == '-' || is_whitespace(base[i]))
+		if(base[i] == '+' || base[i] == '-' || is_whitespace(base[i]) || base[i] < 32)
             return 0;
-        i++;
-    }
-    i = 0;
-    while(base[i]){
         c = base[i];
         j = i + 1;
         while(base[j]){
@@ -37,6 +33,7 @@ int is_valid(char *base){
     }
     return 1;
 }
+
 int is_present(char c, char *base){
     int i;
     i = 0;
@@ -47,6 +44,17 @@ int is_present(char c, char *base){
     }
     return 0;
 }
+int ft_get_index_base(char c, char *base){
+	int i;
+
+	i = 0;
+	while(base[i]){
+		if (base[i] == c)
+			return i;
+		i++;
+	}
+	return i;
+}
 
 
 int ft_atoi_base(char *str, char *base){
@@ -55,21 +63,18 @@ int ft_atoi_base(char *str, char *base){
     int atoi = 0;
     int base_l;
 
-    if(!is_valid(base))
+    if(!check_base(base))
         return 0;
     base_l = ft_strlen(base);
-    while(is_whitespace(str[++i]));
+    while(is_whitespace(str[i])){
+		i++;
+	}
     while(str[i] == '-' || str[i] == '+'){
         if(str[i++] == '-')
             sign *= -1;
     }
     while (is_present(str[i], base)){
-        if (str[i] >= 'A' && 'F' >= str[i])
-			atoi = (atoi * base_l) + (str[i] - 'A' + 10);
-		else if (str[i] >= 'a' && 'f' >= str[i])
-			atoi = (atoi * base_l) + (str[i] - 'a' + 10);
-		else
-			atoi = (atoi * base_l) + (str[i] - '0');
+		atoi = (atoi * base_l) + ft_get_index_base(str[i], base);
         i++;
     }
     return atoi * sign;
@@ -78,9 +83,9 @@ int ft_atoi_base(char *str, char *base){
 /*
 #include <stdlib.h>
 #include <stdio.h>
-int main()
+int main(int ac, char *av[])
 {
-    printf("%d", ft_atoi_base("    \r   \t   +123456789abcdef", "0123456789"));
+    printf("%d", ft_atoi_base(av[1], av[2]));
     return 0;
 }
 */
