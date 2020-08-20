@@ -1,4 +1,4 @@
-#include "ft_convert_base_2.c"
+#include "ft_convert_base2.c"
 
 char *convert_to_a_base(int nbr, char *base_to){
 	int sign;
@@ -37,8 +37,9 @@ char 	*ft_convert_base(char *nbr, char *base_from, char *base_to){
 	 
 }
 
-
+/*
 int main(int ac, char *av[]){
 	if (ac == 4)
 		printf("%s", ft_convert_base(av[1], av[2], av[3]));
 }
+*/

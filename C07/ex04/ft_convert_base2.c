@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 int is_whitespace(char c){
     if(c == ' ' || (c >= 9 && c <= 13))
         return 1;
