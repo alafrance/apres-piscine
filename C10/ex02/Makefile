@@ -1,12 +1,12 @@
-NAME=ft_display_file
-SRC=ft_display_file.c
+NAME=ft_tail
+SRC=$(NAME).c
 CC=gcc
 FLAG=-Wall -Wextra -Werror
 OPTION=-o
 all: $(NAME)
 
 clean:
-	rm $(NAME)
+	rm $(NAME) 
 
 $(NAME):
 	$(CC) $(FLAG) $(OPTION) $(NAME) $(SRC)	

@@ -1,5 +1,5 @@
-NAME=ft_display_file
-SRC=ft_display_file.c
+NAME=ft_cat
+SRC=ft_cat.c
 CC=gcc
 FLAG=-Wall -Wextra -Werror
 OPTION=-o
