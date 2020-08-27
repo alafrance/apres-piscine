@@ -1,88 +1,102 @@
 #include "ft_h.h"
-#include <stdio.h>
-void ft_display_error(char *filename){
-		ft_putstr("ft_tail: ");
-		ft_putstr(filename);
-		ft_putstr(": ");
-		ft_putstr(strerror(errno));
-		ft_putchar('\n');
-
-	
-}
-
-void ft_display_file(char *filename, int nbr_line, int nbr_line_total){
-	int fd;
-	char buf[1];
-
-	fd = open(filename, O_RDONLY);
-
-	if(fd == -1)
-		ft_display_error(filename);
-	else{
-		while(read(fd, buf, 1))
-			ft_putstr(buf);
-		close(fd);
-	}
-}
-
-
-
-int ft_count_chars(char *filename){
-	int count;
-	int fd;
-	char buf[1];
-	fd = open(filename, O_RDONLY);
-	count = 0;
-	if(fd == -1)
-		ft_display_error(filename);	
-	else{
-		while(read(fd, buf, 1))
-				count++;
-	}	
-	return count;
-
-}
-void ft_tail(char **array_filemane, int size, int nbr_chars){
-	int i;
-	int nbr_chars_total;
-	i = 2;
-	
-	nbr_chars_total = 0;
-	while(i != size){
-		if(size > 2 ){
-			ft_putstr("==> ");
-			ft_putstr(array_filemane[i]);
-			ft_putstr(" <==\n");
-		}
-		//if(array_filemane[0][1] == '-')
-		// compter le nombre de lignes
-		nbr_chars_total = ft_count_chars(array_filemane[i]);
-		printf("%d\n", nbr_chars_total);
-		//ft_display_file(array_filemane[i++], nbr_line, nbr_line_total);
-		i++;
-	}
-}
+#include "ft_option_c.h"
 
 void  disp_void(void){
 	char buffer;
 
 	while(read(0, &buffer, 1) != 0);
 }
+void ft_display_error_filename(char *filename){
+		ft_putstr("ft_tail: ");
+		ft_putstr(filename);
+		ft_putstr(": ");
+		ft_putstr(strerror(errno));
+		ft_putchar('\n');
+}
 
-// il manque l'option c et malloc
+int ft_count_size_file(char *filename){
+	int count;
+	int fd;
+	char buf[1];
+	fd = open(filename, O_RDONLY);
+	count = 0;
+	if(fd != -1){
+		while(read(fd, buf, 1))
+				count++;
+	}
+	close(fd);	
+	return count;
+
+}
+
+void display_name_file(int size_array_filename, char *filemane){
+	if(size_array_filename > 4){
+			ft_putstr("==> ");
+			ft_putstr(filemane);
+			ft_putstr(" <==\n");
+	}
+}
+void display_file_with_size(char *filemane, int size_display, int size_file){
+	int fd;
+	int i;
+	char *buf;
+
+	if (size_display < size_file)
+		buf = malloc(sizeof(char*) * size_display);
+	else
+		buf = malloc(sizeof(char*) * size_file);
+	i = 0;
+	fd = open(filemane, O_RDONLY);
+		if(fd == -1)
+			ft_display_error_filename(filemane);
+		else{
+			if(size_display < size_file){
+				while(i != size_file - size_display && read(fd, buf, 1))
+				i++;
+				read(fd, buf, size_display);
+			}else
+				read(fd, buf, size_file);
+		(size_display != 0) ? ft_putstr(buf) : NULL;
+	}
+	close(fd);
+}
+
+void ft_tail(char **array_filemane, int size_array_filename, int size_display){
+	int i;
+	int size_file;
+	
+	i = 1;
+	size_file = 0;
+	while(i != size_array_filename){
+		if(is_a_file(array_filemane, i)){
+			display_name_file(size_array_filename, array_filemane[i]);	
+			size_file = ft_count_size_file(array_filemane[i]);
+			display_file_with_size(array_filemane[i], size_display, size_file);
+		}
+		i++;
+	}
+}
+
 int main(int ac, char **av){
 	errno = 0;
-	if((ac == 2 && av[1][0] == '-') || ac == 1){
+	
+	// if there are no files but option	
+	if(isnt_files(av, ac) && is_option(av, ac)){
 		disp_void();
 	}
-	else if(ac > 2 && av[1][0] == '-' && ft_strlen(av[1]) == 1){
-		ft_putstr("==> entrée standard <==\n");
-		disp_void();
+	// if there are no option for -c
+	else if(isnt_a_option(av, ac)){
+		ft_putstr("ft_tail: l'option requiert un argument -- c\n");	
 	}
-	else if(ac > 2 && av[1][0] == '-' && ft_atoi(av[1]) > 0)
-		ft_tail(av, ac, ft_atoi(av[1]));
+	// if the option for -c is false
+	else if(!is_option(av, ac)){
+		ft_putstr("ft_tail: nombre d'octets incorrect: « ");
+		ft_putstr(option(av, ac));
+		ft_putstr(" »\n");
+	}
+	// All is good
 	else
-		ft_tail(av, ac, 10);
+		ft_tail(av, ac, ft_atoi(option(av, ac)));
 	return 0;
 }
 

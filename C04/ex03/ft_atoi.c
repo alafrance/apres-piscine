@@ -7,6 +7,8 @@ int is_whitespace(char c){
     return (c == ' ' || (c >= 9 && c <= 13)) ? 1 : 0;
 }
 
+
+
 int ft_atoi(char *str){
     int nb;
     int sign;
@@ -24,15 +26,17 @@ int ft_atoi(char *str){
     return nb * sign;
 }
 
-/*
+
+
 #include <stdlib.h>
 #include <stdio.h>
 int main(int argc, char const *argv[])
 {
     int nb;
     nb = ft_atoi("      \t \r     -----+++--1045p234ab567");
-    //ft_putnbr(nb);
+    nb = ft_atoi((char*)argv[1]);
+	//ft_putnbr(nb);
     printf("%d", nb);
     return 0;
 }
-*/
+
