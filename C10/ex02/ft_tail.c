@@ -47,17 +47,13 @@ void display_file_with_size(char *filemane, int size_display, int size_file){
 		buf = malloc(sizeof(char*) * size_file);
 	i = 0;
 	fd = open(filemane, O_RDONLY);
-		if(fd == -1)
-			ft_display_error_filename(filemane);
-		else{
-			if(size_display < size_file){
-				while(i != size_file - size_display && read(fd, buf, 1))
-				i++;
-				read(fd, buf, size_display);
-			}else
-				read(fd, buf, size_file);
-		(size_display != 0) ? ft_putstr(buf) : NULL;
-	}
+	if(size_display < size_file){
+		while(i != size_file - size_display && read(fd, buf, 1))
+		i++;
+		read(fd, buf, size_display);
+	}else
+		read(fd, buf, size_file);
+	(size_display != 0) ? ft_putstr(buf) : NULL;
 	close(fd);
 }
 
@@ -68,25 +64,25 @@ void ft_tail(char **array_filemane, int size_array_filename, int size_display){
 	i = 1;
 	size_file = 0;
 	while(i != size_array_filename){
-		if(is_a_file(array_filemane, i)){
+		if(is_a_file(array_filemane[i])){
 			display_name_file(size_array_filename, array_filemane[i]);	
 			size_file = ft_count_size_file(array_filemane[i]);
 			display_file_with_size(array_filemane[i], size_display, size_file);
-		}
+		}else if(!is_c_option(array_filemane[i]) && !is_c_option(array_filemane[i - 1]))
+			ft_display_error_filename(array_filemane[i]);
 		i++;
 	}
 }
-
+#include <stdio.h>
 int main(int ac, char **av){
 	errno = 0;
-	
-	// if there are no files but option	
-	if(isnt_files(av, ac) && is_option(av, ac)){
-		disp_void();
-	}
 	// if there are no option for -c
-	else if(isnt_a_option(av, ac)){
+	if(isnt_a_option(av, ac)){
 		ft_putstr("ft_tail: l'option requiert un argument -- c\n");	
+	}
+	// if there are no files but option	
+	else if(ac == 1 || is_option(av, ac) && ac == 3 || ac == 2 && av[1][0] == '-' && ft_strlen(av[1]) == 1){
+		disp_void();
 	}
 	// if the option for -c is false
 	else if(!is_option(av, ac)){

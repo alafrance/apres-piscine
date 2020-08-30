@@ -6,6 +6,7 @@
 #include <libgen.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <stdio.h>
 int is_c_option(char *str);
 void ft_putchar(char c){
 	write(1, &c, 1);
@@ -95,18 +96,26 @@ void ft_putnbr(int nb)
     write(1, &nb, 1);
 }
 
-int isnt_files(char **av, int ac){
+int is_files(char **av, int ac){
+	int fd;
 	int i;
 
 	i = 1;
+
 	while(i != ac){
-		if(av[i][0] != '-' && !is_c_option(av[i - 1]))
-			return 0;
+		fd = open(av[i], O_RDONLY);
+		if(fd != -1 ) {
+			close(fd);
+			return 1;
+		}
 		i++;
+		close(fd);
 	}
-	return 1;	
+	return 0;
 }
-int is_a_file(char **av, int index){
-	return (av[index][0] != '-' && !is_c_option(av[index - 1]) ) ? 1 : 0;
+int is_a_file(char *filename){
+	int fd;
+	fd = open(filename, O_RDONLY);
+	return (fd == -1) ? 0 : 1;
 }
 #endif
