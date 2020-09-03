@@ -50,8 +50,7 @@ void ft_rev_params(char *tab[], int size){
 		i++;
 	}
 }
-/*
-#include <stdio.h>
+
 int main(int ac, char *av[]){
 	int i;
 
@@ -65,4 +64,3 @@ int main(int ac, char *av[]){
 		ft_putchar('\n');
 	}
 }
-*/
