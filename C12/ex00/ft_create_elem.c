@@ -11,10 +11,3 @@ t_list *ft_create_elem(void *data){
 	return elem;
 }
 
-/*
-#include <stdio.h>
-int main(int ac, char **av){
-	t_list *element;
-	element = ft_create_elem("je suis une data");
-}
-*/
