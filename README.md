@@ -8,6 +8,6 @@ Done - C05 but not 'les dix dames'
 Done - C06  
 Done - C07  
 Done - C08  
-Done - C09.  
-Done - C10. 
+Done - C09  
+Done - C10  
 Done - C11
